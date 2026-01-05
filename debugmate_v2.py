@@ -30,13 +30,11 @@ if st.button("Fix My Bug 🚀"):
             model = genai.GenerativeModel("gemini-1.5-pro")
             
             with st.spinner("Analyzing your bug..."):
-                response = model.generate_content(
-                    f"You are an expert debugger. Explain this error simply and provide the fixed code:\n\n{user_input}"
-                )
+                prompt = f"You are an expert debugger. Explain this error simply and provide the fixed code:\n\n{user_input}"
+                response = model.generate_content(prompt)
             
             st.success("Analysis Complete!")
             st.markdown(response.text)
             
         except Exception as e:
             st.error(f"An error occurred: {e}")
-                st.error(f"Error: {e}")
